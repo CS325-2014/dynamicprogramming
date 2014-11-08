@@ -1,0 +1,84 @@
+#-----------------------------------------------------------------------------#
+# Name: dynamicprogramming.py
+# Desc: Implementation for Dynamic Programming Project in CS 325
+# Auth: Cezary Wojcik
+# Note:
+# Opts: -i, --inputfile     : specify input file (defaults to "test.txt")
+#       -o, --outputfile    : specify output file for results
+#       -d, --debug           : show debug messages
+#-----------------------------------------------------------------------------#
+
+# ---- [ imports ] ------------------------------------------------------------
+
+import getopt, sys
+
+# ---- [ globals ] ------------------------------------------------------------
+
+debug = False
+outputfile = "proj3_grp3.txt"
+benchmarkfile = "benchmarks.csv"
+
+# ---- [ classes ] ------------------------------------------------------------
+
+class Grid():
+  def __init__(self, inputfile):
+    with open(inputfile) as f:
+      arr = f.readlines()
+      self.num_rows = int(arr[0])
+      self.num_cols = int(arr[1])
+      self.values = []
+      for row in arr[2:]:
+        self.values.append(map(lambda x: int(x), row.split(" ")))
+      print self.values
+
+  def heuristic():
+    print "TODO"
+
+# ---- [ utility functions ] --------------------------------------------------
+
+def handle_error(message):
+  print "Error: {0}".format(message)
+  sys.exit(2)
+
+def debug_message(message):
+  global debug
+  if debug:
+    print message
+
+# ---- [ main ] ---------------------------------------------------------------
+
+def main(argv):
+  global debug, outputfile, benchmarkfile
+
+  try:
+    opts, args = getopt.getopt(sys.argv[1:], 'i:o:d',
+      ['inputfile=', 'outputfile=', 'debug'])
+  except getopt.GetoptError as err:
+    handle_error(str(err))
+
+  inputfile = "test.txt"
+
+  for o, a in opts:
+    if o in ['-i', '--inputfile']:
+      inputfile = a
+    elif o in ['-o', '--outputfile']:
+      outputfile = a
+    elif o in ['-d', '--debug']:
+      debug = True
+    else:
+      handle_error("unhandled option '{0}' detected".format(o))
+
+  # create results output file
+  try:
+    f = open(outputfile, "w+")
+    f.close()
+  except IOError:
+    handle_error("failed to write to file, '{0}'."
+      .format(benchmarkfile))
+
+  # TODO - parse input file
+  grid = Grid(inputfile)
+  grid.heuristic
+
+if __name__ == "__main__":
+    main(sys.argv[1:])
