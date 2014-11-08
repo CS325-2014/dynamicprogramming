@@ -78,7 +78,7 @@ def main(argv):
 
   # TODO - parse input file
   grid = Grid(inputfile)
-  grid.heuristic
+  grid.heuristic()
 
 if __name__ == "__main__":
     main(sys.argv[1:])
