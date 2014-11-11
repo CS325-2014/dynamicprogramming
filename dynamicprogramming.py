@@ -1,7 +1,7 @@
 #-----------------------------------------------------------------------------#
 # Name: dynamicprogramming.py
 # Desc: Implementation for Dynamic Programming Project in CS 325
-# Auth: Cezary Wojcik
+# Auth: Cezary Wojcik, Sean McGlothlin, Matthew Eilertson
 # Note:
 # Opts: -i, --inputfile     : specify input file (defaults to "test.txt")
 #       -o, --outputfile    : specify output file for results
