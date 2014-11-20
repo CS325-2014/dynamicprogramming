@@ -10,7 +10,7 @@
 
 # ---- [ imports ] ------------------------------------------------------------
 
-import getopt, sys
+import getopt, sys, re
 
 # ---- [ globals ] ------------------------------------------------------------
 
@@ -28,7 +28,8 @@ class Grid():
       self.num_cols = int(arr[1])
       self.values = []
       for row in arr[2:]:
-        self.values.append(map(lambda x: int(x), row.split(" ")))
+        self.values.append(map(lambda x: int(x),
+          filter(lambda x: len(x) > 0, re.sub(r"\s+", " ", row).split(" "))))
 
   def h_value(self, h, i, j):
     if i < 0 or j < 0:
