@@ -56,40 +56,67 @@ $$
 The problem with this function is that it does not account for base cases. We can remedy this fairly simply:
 
 $$
-T[i,j] =
-\left \{
-	\begin{tabular}{ll}
-		 $\max \left \{ 
-			\begin{tabular}{l}
-				$A[i,j]$ \\
-				$T[i-1, j] + A[i, j]$ \\
-				$T[i, j-1] + A[i, j]$
-			\end{tabular} 
-		\right \}$ & $i \neq 0, j \neq 0$ \\
-		 $\max \left \{ 
-			\begin{tabular}{l}
-				$A[i,j]$ \\
-				$T[i-1, j] + A[i, j]$ \\
-				$T[i, j-1] + A[i, j]$
-			\end{tabular} 
-		\right \}$ & MAKE CONDITIONS AND THINGS \\
-	\end{tabular}
-\right .
+T[i,j] = \max \left \{ 
+	\begin{tabular}{l}
+		$A[i,j]$ \\
+		$\left \{
+			\begin{tabular}{ll}
+				$T[i-1, j] + A[i, j]$ & $i > 0$ \\
+				$0 + A[i, j]$ & $i = 0$
+			\end{tabular}
+		\right .$ \\
+		$\left \{
+			\begin{tabular}{ll}
+				$T[i, j-1] + A[i, j]$ & $j > 0$ \\
+				$0 + A[i, j]$ & $j = 0$
+			\end{tabular}
+		\right .$ \\
+	\end{tabular} 
+\right \}
 $$
 
 Now the formula will correctly find the best solution that ends at entry $(i, j)$.
 
 \section*{Pseudocode}
 
-
-\textsc{BestPath}(grid, i, j):
-
+\textsc{HValue}(H, i, j):
 \begin{algorithmic}
-\If {things happen}
-	\State other things happen
+\If {i < 0 or j <	 0}
+	\State \Return 0
 \Else
-	\State things die
+	\State \Return H[i][j]
 \EndIf
+\end{algorithmic}
+
+\textsc{Heuristic}(grid, i, j):
+\begin{algorithmic}
+\State $H \gets$ Array2D()
+\For{y = 0 to j}
+	\For{x = 0 to i}
+		\State H[x][y] $\gets$ grid[x][y] + $\max \{$ \textsc{HValue}(H, i-1, j), \textsc{HValue}(H, i, j-1)  $\}$
+	\EndFor
+\EndFor
+\State \Return H
+\end{algorithmic}
+
+\newpage
+
+\textsc{OptimalPath}(grid)
+\begin{algorithmic}
+\State $H \gets$ \textsc{Heuristic}(grid, grid.rows - 1, grid.columns - 1)
+\State $(x, y) \gets \max \{ $ elements in bottom row of $H$ and last column of $H \}$
+\State Path $\gets$ Array()
+\State Path.append($(x, y)$)
+\While{$x \neq 0 and y \neq 0$}
+	\If $H[x-1][y] > H[x][y-1]$ and $x > 0$
+		\State $x \gets x - 1$
+		\State Path.append($(x, y)$)
+	\Else
+		\State $y \gets y - 1$
+		\State Path.append($(x, y)$)
+	\EndIf 
+\EndWhile
+\State \Return Path
 \end{algorithmic}
 
 Running time: something
