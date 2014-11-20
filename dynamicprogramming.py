@@ -47,7 +47,7 @@ class Grid():
 
   def ending_point(self):
     (i, j) = (0, 0)
-    val = 0
+    val = self.h[i][j]
     for x in range(0, self.num_cols):
       if self.h[x][self.num_rows - 1] > val:
         (i, j) = (x, self.num_cols - 1)
