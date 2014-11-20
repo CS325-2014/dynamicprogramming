@@ -47,17 +47,16 @@ class Grid():
     (i, j) = (0, 0)
     val = 0
     for x in range(0, self.num_cols):
-      if self.values[x][self.num_rows - 1] > val:
+      if self.h[x][self.num_rows - 1] > val:
         (i, j) = (x, self.num_cols - 1)
-        val = self.values[x][self.num_rows - 1]
-    for y in range(0, self.num_rows):
-      if self.values[self.num_cols - 1][y] > val:
+        val = self.h[x][self.num_rows - 1]
+    for y in range(0, self.num_rows - 1):
+      if self.h[self.num_cols - 1][y] > val:
         (i, j) = (self.num_rows - 1, y)
-        val = self.values[self.num_rows - 1][y]
+        val = self.h[self.num_rows - 1][y]
     return (i, j, val)
 
   def optimal_path(self):
-    print "swag"
     (x, y, val) = self.ending_point()
     path = [(x,y)]
     while x != 0 and y != 0 and not(self.h[x-1][y] < 0 and self.h[x][y-1] < 0):
@@ -67,7 +66,7 @@ class Grid():
       else:
         y -= 1
         path.append((x, y))
-    return path
+    return path[::-1]
 
 # ---- [ utility functions ] --------------------------------------------------
 
