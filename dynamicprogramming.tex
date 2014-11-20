@@ -1,0 +1,97 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage[T1]{fontenc}
+\usepackage{anysize}
+\usepackage{tikz}
+\usepackage{amssymb}
+\usepackage{comment}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{algpseudocode}
+
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{1em}
+
+\newcommand{\contradiction}{%
+\begin{tikzpicture}[rotate=45,x=0.5ex,y=0.5ex]
+\draw[line width=.2ex] (0,2) -- (3,2) (0,1) -- (3,1) (1,3) -- (1,0) (2,3) -- (2,0);
+\end{tikzpicture}
+}
+
+\marginsize{2cm}{2cm}{1cm}{1cm}
+
+\begin{document}
+
+\begin{titlepage}
+    \vspace*{4cm}
+    {\huge \center
+        CS 325 Project 3 Report\\[1cm]
+    }
+    \center
+    {\large
+        Group 3
+
+        Date: \today
+
+    \textbf{Contributors:}
+    Cezary Wojcik,
+    Sean McGlothlin,
+    Matthew Eilertson
+    }
+
+\end{titlepage}
+
+\section*{Recursive Function}
+
+We start with the following recursive function:
+
+$$
+T[i,j] =
+\max \left \{ \begin{tabular}{l}
+A[i,j] \\
+T[i-1, j] + A[i, j] \\
+T[i, j-1] + A[i, j]
+\end{tabular} \right \}
+$$
+
+The problem with this function is that it does not account for base cases. We can remedy this fairly simply:
+
+$$
+T[i,j] =
+\left \{
+	\begin{tabular}{ll}
+		 $\max \left \{ 
+			\begin{tabular}{l}
+				$A[i,j]$ \\
+				$T[i-1, j] + A[i, j]$ \\
+				$T[i, j-1] + A[i, j]$
+			\end{tabular} 
+		\right \}$ & $i \neq 0, j \neq 0$ \\
+		 $\max \left \{ 
+			\begin{tabular}{l}
+				$A[i,j]$ \\
+				$T[i-1, j] + A[i, j]$ \\
+				$T[i, j-1] + A[i, j]$
+			\end{tabular} 
+		\right \}$ & MAKE CONDITIONS AND THINGS \\
+	\end{tabular}
+\right .
+$$
+
+Now the formula will correctly find the best solution that ends at entry $(i, j)$.
+
+\section*{Pseudocode}
+
+
+\textsc{BestPath}(grid, i, j):
+
+\begin{algorithmic}
+\If {things happen}
+	\State other things happen
+\Else
+	\State things die
+\EndIf
+\end{algorithmic}
+
+Running time: something
+
+\end{document}
