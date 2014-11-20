@@ -88,6 +88,8 @@ Now the formula will correctly find the best solution that ends at entry $(i, j)
 \EndIf
 \end{algorithmic}
 
+Running time: $\Theta(1)$
+
 \textsc{Heuristic}(grid, i, j):
 \begin{algorithmic}
 \State $H \gets$ Array2D()
@@ -98,6 +100,8 @@ Now the formula will correctly find the best solution that ends at entry $(i, j)
 \EndFor
 \State \Return H
 \end{algorithmic}
+
+Running time: $\Theta(i \times j)$
 
 \newpage
 
@@ -118,7 +122,5 @@ Now the formula will correctly find the best solution that ends at entry $(i, j)
 \EndWhile
 \State \Return Path
 \end{algorithmic}
-
-Running time: something
 
 \end{document}

@@ -57,6 +57,7 @@ class Grid():
     return (i, j, val)
 
   def optimal_path(self):
+    self.heuristic()
     (x, y, val) = self.ending_point()
     path = [(x,y)]
     while x != 0 and y != 0 and not(self.h[x-1][y] < 0 and self.h[x][y-1] < 0):
@@ -66,7 +67,7 @@ class Grid():
       else:
         y -= 1
         path.append((x, y))
-    return path[::-1]
+    return val, path[::-1]
 
 # ---- [ utility functions ] --------------------------------------------------
 
@@ -112,8 +113,13 @@ def main(argv):
 
   # TODO - parse input file
   grid = Grid(inputfile)
-  grid.heuristic()
-  print grid.optimal_path()
+  val, path = grid.optimal_path()
+  f = open(outputfile, "w")
+  f.write(str(val) + "\n")
+  f.write(str(len(path)) + "\n")
+  for c in path:
+    f.write(str(c[0]) + " " + str(c[1]) + "\n")
+  f.close()
 
 if __name__ == "__main__":
     main(sys.argv[1:])
