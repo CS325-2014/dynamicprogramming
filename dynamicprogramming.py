@@ -41,7 +41,33 @@ class Grid():
       for x in range(0, self.num_cols):
         h[x][y] = self.values[x][y] + max(self.h_value(h, x-1, y),
           self.h_value(h, x, y-1), 0)
-    print h
+    self.h = h
+
+  def ending_point(self):
+    (i, j) = (0, 0)
+    val = 0
+    for x in range(0, self.num_cols):
+      if self.values[x][self.num_rows - 1] > val:
+        (i, j) = (x, self.num_cols - 1)
+        val = self.values[x][self.num_rows - 1]
+    for y in range(0, self.num_rows):
+      if self.values[self.num_cols - 1][y] > val:
+        (i, j) = (self.num_rows - 1, y)
+        val = self.values[self.num_rows - 1][y]
+    return (i, j, val)
+
+  def optimal_path(self):
+    print "swag"
+    (x, y, val) = self.ending_point()
+    path = [(x,y)]
+    while x != 0 and y != 0 and not(self.h[x-1][y] < 0 and self.h[x][y-1] < 0):
+      if self.h[x-1][y] > self.h[x][y-1] and x > 0:
+        x -= 1
+        path.append((x, y))
+      else:
+        y -= 1
+        path.append((x, y))
+    return path
 
 # ---- [ utility functions ] --------------------------------------------------
 
@@ -88,6 +114,7 @@ def main(argv):
   # TODO - parse input file
   grid = Grid(inputfile)
   grid.heuristic()
+  print grid.optimal_path()
 
 if __name__ == "__main__":
     main(sys.argv[1:])

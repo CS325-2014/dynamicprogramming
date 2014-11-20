@@ -93,7 +93,7 @@ Now the formula will correctly find the best solution that ends at entry $(i, j)
 \State $H \gets$ Array2D()
 \For{y = 0 to j}
 	\For{x = 0 to i}
-		\State H[x][y] $\gets$ grid[x][y] + $\max \{$ \textsc{HValue}(H, i-1, j), \textsc{HValue}(H, i, j-1)  $\}$
+		\State H[x][y] $\gets$ grid[x][y] + $\max \{$ \textsc{HValue}(H, i-1, j), \textsc{HValue}(H, i, j-1), 0  $\}$
 	\EndFor
 \EndFor
 \State \Return H
