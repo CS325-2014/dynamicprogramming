@@ -104,11 +104,11 @@ Now the formula will correctly find the best solution that ends at entry $(i, j)
 \textsc{OptimalPath}(grid)
 \begin{algorithmic}
 \State $H \gets$ \textsc{Heuristic}(grid, grid.rows - 1, grid.columns - 1)
-\State $(x, y) \gets \max \{ $ elements in bottom row of $H$ and last column of $H \}$
+\State $(x, y) \gets \max \{ $elements in bottom row of $H$ and last column of $H \}$
 \State Path $\gets$ Array()
 \State Path.append($(x, y)$)
-\While{$x \neq 0 and y \neq 0$}
-	\If $H[x-1][y] > H[x][y-1]$ and $x > 0$
+\While{$x \neq 0 $ and $ y \neq 0$ and not $(H[x-1][y] < 0$ and $H[x][y-1] < 0)$}
+	\If{$H[x-1][y] > H[x][y-1]$ and $x > 0$}
 		\State $x \gets x - 1$
 		\State Path.append($(x, y)$)
 	\Else
