@@ -40,7 +40,7 @@ class Grid():
     for y in range(0, self.num_rows):
       for x in range(0, self.num_cols):
         h[x][y] = self.values[x][y] + max(self.h_value(h, x-1, y),
-          self.h_value(h, x, y-1))
+          self.h_value(h, x, y-1), 0)
     print h
 
 # ---- [ utility functions ] --------------------------------------------------
