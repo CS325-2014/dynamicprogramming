@@ -29,10 +29,19 @@ class Grid():
       self.values = []
       for row in arr[2:]:
         self.values.append(map(lambda x: int(x), row.split(" ")))
-      print self.values
 
-  def heuristic():
-    print "TODO"
+  def h_value(self, h, i, j):
+    if i < 0 or j < 0:
+      return 0
+    return h[i][j]
+
+  def heuristic(self):
+    h = [[0 for x in range(self.num_rows)] for x in range(self.num_cols)]
+    for y in range(0, self.num_rows):
+      for x in range(0, self.num_cols):
+        h[x][y] = self.values[x][y] + max(self.h_value(h, x-1, y),
+          self.h_value(h, x, y-1))
+    print h
 
 # ---- [ utility functions ] --------------------------------------------------
 
