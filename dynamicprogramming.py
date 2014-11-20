@@ -43,7 +43,6 @@ class Grid():
         h[x][y] = self.values[x][y] + max(self.h_value(h, x-1, y),
           self.h_value(h, x, y-1), 0)
     self.h = h
-    print h
 
   def ending_point(self):
     (i, j) = (0, 0)
